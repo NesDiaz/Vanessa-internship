@@ -12,20 +12,21 @@ const ItemDetails = () => {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+ useEffect(() => {
     window.scrollTo(0, 0);
 
     const fetchItem = async () => {
       try {
-        const response = await axios.get(
-          "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
-        );
+     const response = await axios.get(
+  "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
+);
 
-        const selectedItem = response.data.find(
-          (collection) => collection.id === Number(id)
-        );
+const selectedItem = response.data.find(
+  (item) => item.id === Number(id)
+);
 
-        setItem(selectedItem);
+setItem(selectedItem);
+
       } catch (error) {
         console.error(error);
       } finally {
@@ -52,18 +53,16 @@ const ItemDetails = () => {
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
             <div className="row">
-
               <div className="col-md-6 text-center">
                 <img
                   src={item.nftImage}
-                 className="img-fluid img-rounded mb-sm-30 skeleton-box skeleton-detail-image"
+                  className="img-fluid img-rounded mb-sm-30 skeleton-box skeleton-detail-image"
                   alt={item.title}
                 />
               </div>
 
               <div className="col-md-6">
                 <div className="item_info">
-
                   <h2>{item.title}</h2>
 
                   <div className="item_info_counts">
@@ -74,13 +73,13 @@ const ItemDetails = () => {
 
                     <div className="item_info_like">
                       <i className="fa fa-heart"></i>
-                      74
+                      {item.likes}
                     </div>
                   </div>
 
                   <p>
-                    doloremque laudantium, totam rem aperiam, eaque ipsa quae
-                    ab illo inventore veritatis et quasi architecto beatae vitae
+                    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+                    illo inventore veritatis et quasi architecto beatae vitae
                     dicta sunt explicabo.
                   </p>
 
@@ -90,7 +89,7 @@ const ItemDetails = () => {
 
                       <div className="item_author">
                         <div className="author_list_pp">
-                          <Link to="/author">
+                          <Link to={`/author/${item.authorId}`}>
                             <img
                               className="lazy"
                               src={item.authorImage}
@@ -101,8 +100,8 @@ const ItemDetails = () => {
                         </div>
 
                         <div className="author_list_info">
-                          <Link to="/author">
-                            Author #{item.authorId}
+                          <Link to={`/author/${item.authorId}`}>
+                            {item.authorId}
                           </Link>
                         </div>
                       </div>
@@ -110,13 +109,12 @@ const ItemDetails = () => {
                   </div>
 
                   <div className="de_tab tab_simple">
-
                     <div className="de_tab_content">
                       <h6>Creator</h6>
 
                       <div className="item_author">
                         <div className="author_list_pp">
-                          <Link to="/author">
+                          <Link to={`/author/${item.authorId}`}>
                             <img
                               className="lazy"
                               src={item.authorImage}
@@ -127,8 +125,8 @@ const ItemDetails = () => {
                         </div>
 
                         <div className="author_list_info">
-                          <Link to="/author">
-                            Author #{item.authorId}
+                          <Link to={`/author/${item.authorId}`}>
+                          {item.authorId}
                           </Link>
                         </div>
                       </div>
@@ -136,18 +134,15 @@ const ItemDetails = () => {
 
                     <div className="spacer-40"></div>
 
-                    <h6>Collection Code</h6>
+                    <h6>Price</h6>
 
                     <div className="nft-item-price">
                       <img src={EthImage} alt="" />
-                      <span>ERC-{item.code}</span>
+                      <span>{item.price}</span>
                     </div>
-
                   </div>
-
                 </div>
               </div>
-
             </div>
           </div>
         </section>

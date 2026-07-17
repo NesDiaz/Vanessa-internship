@@ -128,3 +128,42 @@
   display: flex;
   align-items: center;
 }
+
+/* New Items skeleton loading */
+.skeleton-countdown{
+    width: 100px;
+    height: 34px;
+    border-radius: 18px;
+}
+.skeleton-de-countdown {
+  border: none !important;
+  background: transparent !important;
+  padding: 0;
+  box-shadow: none;
+}
+.de_countdown{
+    display:flex;
+    justify-content:flex-end;
+}
+
+
+.author_list_pp .skeleton-avatar{
+    margin-top: 8px;
+}
+
+.skeleton-heart{
+    width:16px;
+    height:16px;
+    border-radius:50%;
+}
+
+.skeleton-like-text{
+    width:24px;
+    height:14px;
+}
+
+.nft__item_like{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
