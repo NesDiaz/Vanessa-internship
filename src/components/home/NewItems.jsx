@@ -42,7 +42,7 @@ const NewItems = () => {
       });
 
       setTimeLeft(countdowns);
-    }, 1000);
+    }, 500);
 
     return () => {
       clearInterval(interval);
