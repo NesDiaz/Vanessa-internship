@@ -6,47 +6,50 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 const Author = () => {
-const { id } = useParams();
+  const { id } = useParams();
 
-const [loading, setLoading] = React.useState(true);
-const [author, setAuthor] = React.useState(null);
-const [items, setItems] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  const [author, setAuthor] = React.useState(null);
+  const [items, setItems] = React.useState([]);
 
-useEffect(() => {
-  const fetchItems = async () => {
-    try {
-      const response = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
-      );
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const [newItemsResponse, topSellersResponse] = await Promise.all([
+          axios.get(
+            "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
+          ),
+          axios.get(
+            "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers",
+          ),
+        ]);
 
-      setItems(response.data);
+        setItems(newItemsResponse.data);
 
-      const selectedAuthor = response.data.find(
-        (item) => item.authorId === Number(id)
-      );
+        const selectedAuthor = topSellersResponse.data.find(
+          (seller) => seller.authorId === Number(id),
+        );
 
-      console.log("Selected author:", selectedAuthor);
+        console.log("Selected author:", selectedAuthor);
 
-      setAuthor(selectedAuthor);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
-    }
-  };
+        setAuthor(selectedAuthor);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }
+    };
 
-  fetchItems();
-}, [id]);
+    fetchItems();
+  }, [id]);
 
-if (loading || !author) {
-  return <h2>Loading...</h2>;
-}
+  if (loading || !author) {
+    return <h2>Loading...</h2>;
+  }
 
-const authorItems = items.filter(
-  (item) => item.authorId === Number(id)
-);
+  const authorItems = items.filter((item) => item.authorId === Number(id));
 
   return (
     <div id="wrapper">
@@ -68,13 +71,18 @@ const authorItems = items.filter(
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                    <img src={author.authorImage} alt="Author" />
+                      <img src={author.authorImage} alt={author.authorName} />
 
                       <i className="fa fa-check"></i>
                       <div className="profile_name">
                         <h4>
-                          {author.title}
-                          <span className="profile_username">@monicaaaa</span>
+                          {author.authorName}
+                          <span className="profile_username">
+                            @
+                            {author.authorName
+                              .toLowerCase()
+                              .replace(/\s+/g, "")}
+                          </span>
                           <span id="wallet" className="profile_wallet">
                             UDHUHWudhwd78wdt7edb32uidbwyuidhg7wUHIFUHWewiqdj87dy7
                           </span>
