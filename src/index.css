@@ -203,3 +203,73 @@
     background-position: 300px;
   }
 }
+
+/* Author id Skeleton */
+.author-skeleton-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+
+.author-skeleton-name {
+  width: 220px;
+  height: 28px;
+  margin: 0;
+}
+
+.author-skeleton-username {
+  width: 140px;
+  height: 18px;
+  margin: 0;
+}
+
+.author-skeleton-wallet {
+  width: 180px;
+  height: 18px;
+  margin: 0;
+}
+
+.author-skeleton-button {
+  width: 110px;
+  height: 32px;
+  border-radius: 8px;
+ 
+  
+}
+
+.author-skeleton-card {
+  width: 100%;
+  aspect-ratio: 1;
+ border: none;
+  margin-bottom: 16px;
+}
+
+.author-skeleton-title {
+  width: 80%;
+  height: 18px;
+  margin-bottom: 10px;
+}
+
+.author-skeleton-profile {
+  margin-top: 30px;
+}
+
+.author-skeleton-profile-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+
+.author-skeleton-avatar-wrapper {
+  position: relative;
+}
+
+.author-skeleton-avatar-wrapper .fa-check {
+  position: absolute;
+  bottom: 8px;
+  right: 240px;
+
+}
