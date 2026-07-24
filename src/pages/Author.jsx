@@ -4,6 +4,7 @@ import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
 
 import axios from "axios";
+import AuthorSkeleton from "../components/UI/AuthorSkeleton";
 
 const Author = () => {
   const { id } = useParams();
@@ -46,7 +47,7 @@ const Author = () => {
   }, [id]);
 
   if (loading || !author) {
-    return <h2>Loading...</h2>;
+    return <AuthorSkeleton />;
   }
 
   const authorItems = items.filter((item) => item.authorId === Number(id));
