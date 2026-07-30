@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import NftCardSkeleton from "../UI/NftCardSkeleton";
 
 const NewItemsSkeleton = () => {
   const [width, setWidth] = useState(window.innerWidth);
@@ -40,36 +41,12 @@ const NewItemsSkeleton = () => {
           <div className="col-lg-12">
             <Slider {...settings}>
               {[...Array(4)].map((_, index) => (
-                <div key={index} className="px-2">
-                  <div className="nft__item">
-                    {/* Author */}
-                    <div className="author_list_pp">
-                      <div className="skeleton-box skeleton-avatar"></div>
-                    </div>
-
-                    {/* Countdown */}
-                    <div className="de_countdown skeleton-de-countdown">
-                      <div className="skeleton-box skeleton-countdown"></div>
-                    </div>
-
-                    {/* NFT Image */}
-                    <div className="nft__item_wrap">
-                      <div className="skeleton-box skeleton-image"></div>
-                    </div>
-
-                    {/* Info */}
-                    <div className="nft__item_info">
-                      <div className="skeleton-box skeleton-title"></div>
-
-                      <div className="skeleton-box skeleton-price"></div>
-
-                      <div className="nft__item_like">
-                        <div className="skeleton-box skeleton-heart"></div>
-                        <div className="skeleton-box skeleton-like-text"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <NftCardSkeleton
+                  key={index}
+                  showAvatar
+                  showCountdown
+                  showLikes
+                />
               ))}
             </Slider>
           </div>

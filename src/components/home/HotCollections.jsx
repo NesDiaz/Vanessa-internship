@@ -5,7 +5,7 @@ import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import Skeleton from "../UI/Skeleton";
 
 const HotCollections = () => {
   const [collections, setCollections] = useState([]);
@@ -45,7 +45,6 @@ const HotCollections = () => {
     fetchCollections();
   }, []);
 
-
   const slidesToShow = width < 768 ? 1 : width < 992 ? 2 : width < 1200 ? 3 : 4;
 
   const settings = {
@@ -75,16 +74,16 @@ const HotCollections = () => {
                     <div key={index} className="px-2">
                       <div className="nft_coll">
                         <div className="nft_wrap">
-                          <div className="skeleton-box skeleton-image"></div>
+                          <Skeleton className="skeleton-image" />
                         </div>
 
                         <div className="nft_coll_pp">
-                          <div className="skeleton-box skeleton-avatar"></div>
+                          <div className="skeleton-avatar"></div>
                         </div>
 
                         <div className="nft_coll_info">
-                          <div className="skeleton-box skeleton-title"></div>
-                          <div className="skeleton-box skeleton-code"></div>
+                          <div className="skeleton-title"></div>
+                          <div className="skeleton-code"></div>
                         </div>
                       </div>
                     </div>
