@@ -1,4 +1,5 @@
 import React from "react";
+import Skeleton from "./Skeleton";
 
 const ItemDetailsSkeleton = () => {
   return (
@@ -9,40 +10,36 @@ const ItemDetailsSkeleton = () => {
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
             <div className="row">
-
               {/* Image */}
               <div className="col-md-6 text-center">
-                <div className="skeleton-box skeleton-detail-image"></div>
+                <Skeleton className="skeleton-detail-image" />
               </div>
 
               {/* Right Side */}
               <div className="col-md-6">
-
                 {/* Title */}
-                <div className="skeleton-box skeleton-detail-title"></div>
+                <Skeleton className="skeleton-detail-title" />
 
                 {/* Views / Likes */}
                 <div className="d-flex mb-4">
-                  <div className="skeleton-box skeleton-pill me-2"></div>
-                  <div className="skeleton-box skeleton-pill"></div>
+                  <Skeleton className="skeleton-pill me-2" />
+                  <Skeleton className="skeleton-pill" />
                 </div>
 
                 {/* Description */}
-                <div className="skeleton-box skeleton-detail-line"></div>
-                <div className="skeleton-box skeleton-detail-line"></div>
-                <div className="skeleton-box skeleton-detail-line short"></div>
+                <Skeleton className="skeleton-detail-line" />
+                <Skeleton className="skeleton-detail-line" />
+                <Skeleton className="skeleton-detail-line short" />
 
                 {/* Owner */}
                 <h6>Owner</h6>
 
                 <div className="item_author mb-4">
-
-                  <div className="skeleton-box skeleton-avatar"></div>
+                  <Skeleton className="skeleton-avatar" />
 
                   <div className="author_list_info ms-3">
-                    <div className="skeleton-box skeleton-name"></div>
+                    <Skeleton className="skeleton-name" />
                   </div>
-
                 </div>
 
                 {/* Creator */}
@@ -50,23 +47,19 @@ const ItemDetailsSkeleton = () => {
                 <h6>Creator</h6>
 
                 <div className="item_author mb-4">
-
-                  <div className="skeleton-box skeleton-avatar"></div>
+                  <Skeleton className="skeleton-avatar" />
 
                   <div className="author_list_info ms-3">
-                    <div className="skeleton-box skeleton-name"></div>
+                    <Skeleton className="skeleton-name" />
                   </div>
-
                 </div>
 
                 {/* Price */}
 
                 <h6>Price</h6>
 
-                <div className="skeleton-box skeleton-price"></div>
-
+                <Skeleton className="skeleton-price" />
               </div>
-
             </div>
           </div>
         </section>

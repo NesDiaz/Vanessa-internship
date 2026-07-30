@@ -56,7 +56,7 @@ setItem(selectedItem);
               <div className="col-md-6 text-center">
                 <img
                   src={item.nftImage}
-                  className="img-fluid img-rounded mb-sm-30 skeleton-box skeleton-detail-image"
+                  className="img-fluid img-rounded mb-sm-30"
                   alt={item.title}
                 />
               </div>
