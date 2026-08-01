@@ -21,8 +21,11 @@ const ItemDetails = () => {
   "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
 );
 
+console.log(response.data);
+console.log("Looking for:", Number(id));
+
 const selectedItem = response.data.find(
-  (item) => item.id === Number(id)
+  (item) => item.nftId === Number(id)
 );
 
 setItem(selectedItem);

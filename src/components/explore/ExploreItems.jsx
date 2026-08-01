@@ -76,7 +76,7 @@ const ExploreItems = ({ exploreItems, loading, filter, setFilter }) => {
                   </div>
                 </div>
 
-                <Link to={`/item-details/${item.id}`}>
+                <Link to={`/item-details/${item.nftId}`}>
                   <img
                     src={item.nftImage}
                     className="lazy nft__item_preview"

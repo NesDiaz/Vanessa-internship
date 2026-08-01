@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import axios from "axios";
 import AuthorSkeleton from "../components/UI/AuthorSkeleton";
@@ -13,27 +13,20 @@ const Author = () => {
   const [author, setAuthor] = React.useState(null);
   const [items, setItems] = React.useState([]);
 
+const [followers, setFollowers] = React.useState(0);
+const [isFollowing, setIsFollowing] = React.useState(false);
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const [newItemsResponse, topSellersResponse] = await Promise.all([
-          axios.get(
-            "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
-          ),
-          axios.get(
-            "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers",
-          ),
-        ]);
-
-        setItems(newItemsResponse.data);
-
-        const selectedAuthor = topSellersResponse.data.find(
-          (seller) => seller.authorId === Number(id),
+        const authorResponse = await axios.get(
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
         );
 
-        console.log("Selected author:", selectedAuthor);
+setAuthor(authorResponse.data);
+setItems(authorResponse.data.nftCollection);
+setFollowers(authorResponse.data.followers);
 
-        setAuthor(selectedAuthor);
       } catch (error) {
         console.error(error);
       } finally {
@@ -43,14 +36,29 @@ const Author = () => {
       }
     };
 
-    fetchItems();
+    if (id) {
+      fetchItems();
+    }
   }, [id]);
 
   if (loading || !author) {
     return <AuthorSkeleton />;
   }
 
-  const authorItems = items.filter((item) => item.authorId === Number(id));
+  const itemsWithAuthorImage = items.map(item => ({
+  ...item,
+  authorImage: author.authorImage,
+}));
+
+function handleFollow() {
+  if (isFollowing) {
+    setFollowers((prev) => prev - 1);
+  } else {
+    setFollowers((prev) => prev + 1);
+  }
+
+  setIsFollowing((prev) => !prev);
+}
 
   return (
     <div id="wrapper">
@@ -79,13 +87,10 @@ const Author = () => {
                         <h4>
                           {author.authorName}
                           <span className="profile_username">
-                            @
-                            {author.authorName
-                              .toLowerCase()
-                              .replace(/\s+/g, "")}
+                            @{author.tag}
                           </span>
                           <span id="wallet" className="profile_wallet">
-                            UDHUHWudhwd78wdt7edb32uidbwyuidhg7wUHIFUHWewiqdj87dy7
+                            {author.address}
                           </span>
                           <button id="btn_copy" title="Copy Text">
                             Copy
@@ -96,10 +101,10 @@ const Author = () => {
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">573 followers</div>
-                      <Link to="#" className="btn-main">
-                        Follow
-                      </Link>
+                      <div className="profile_follower">{followers} followers</div>
+                      <button onClick={handleFollow} className="btn-main">
+                        {isFollowing ? "Unfollow" : "Follow"}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -107,7 +112,7 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems items={authorItems} />
+                 <AuthorItems items={itemsWithAuthorImage} />
                 </div>
               </div>
             </div>
