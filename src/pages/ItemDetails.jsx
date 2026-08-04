@@ -12,24 +12,16 @@ const ItemDetails = () => {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
 
- useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
 
     const fetchItem = async () => {
       try {
-     const response = await axios.get(
-  "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
-);
+        const response = await axios.get(
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`,
+        );
 
-console.log(response.data);
-console.log("Looking for:", Number(id));
-
-const selectedItem = response.data.find(
-  (item) => item.nftId === Number(id)
-);
-
-setItem(selectedItem);
-
+        setItem(response.data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -66,12 +58,14 @@ setItem(selectedItem);
 
               <div className="col-md-6">
                 <div className="item_info">
-                  <h2>{item.title}</h2>
+                  <h2>
+                    {item.title} <span>#{item.tag}</span>
+                  </h2>
 
                   <div className="item_info_counts">
                     <div className="item_info_views">
                       <i className="fa fa-eye"></i>
-                      100
+                      {item.views}
                     </div>
 
                     <div className="item_info_like">
@@ -80,11 +74,7 @@ setItem(selectedItem);
                     </div>
                   </div>
 
-                  <p>
-                    doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-                    illo inventore veritatis et quasi architecto beatae vitae
-                    dicta sunt explicabo.
-                  </p>
+                  <p>{item.description}</p>
 
                   <div className="d-flex flex-row">
                     <div className="mr40">
@@ -92,19 +82,19 @@ setItem(selectedItem);
 
                       <div className="item_author">
                         <div className="author_list_pp">
-                          <Link to={`/author/${item.authorId}`}>
+                          <Link to={`/author/${item.ownerId}`}>
                             <img
                               className="lazy"
-                              src={item.authorImage}
-                              alt={item.title}
+                              src={item.ownerImage}
+                              alt={item.ownerName}
                             />
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>
 
                         <div className="author_list_info">
-                          <Link to={`/author/${item.authorId}`}>
-                            {item.authorId}
+                          <Link to={`/author/${item.ownerId}`}>
+                            {item.ownerName}
                           </Link>
                         </div>
                       </div>
@@ -117,19 +107,19 @@ setItem(selectedItem);
 
                       <div className="item_author">
                         <div className="author_list_pp">
-                          <Link to={`/author/${item.authorId}`}>
+                          <Link to={`/author/${item.creatorId}`}>
                             <img
                               className="lazy"
-                              src={item.authorImage}
-                              alt={item.title}
+                              src={item.creatorImage}
+                              alt={item.creatorName}
                             />
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>
 
                         <div className="author_list_info">
-                          <Link to={`/author/${item.authorId}`}>
-                          {item.authorId}
+                          <Link to={`/author/${item.creatorId}`}>
+                            {item.creatorName}
                           </Link>
                         </div>
                       </div>
