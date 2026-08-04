@@ -36,13 +36,14 @@ useEffect(() => {
 
   return (
     <div id="wrapper">
-      <div className="no-bottom no-top" id="content">
+      <div  className="no-bottom no-top" id="content">
         <div id="top"></div>
 
         <section
           id="subheader"
           className="text-light"
           style={{ background: `url("${SubHeader}") top` }}
+          data-aos="fade-in"
         >
           <div className="center-y relative text-center">
             <div className="container">

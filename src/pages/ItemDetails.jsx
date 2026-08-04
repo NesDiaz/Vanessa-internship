@@ -45,7 +45,7 @@ const ItemDetails = () => {
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
-        <section aria-label="section" className="mt90 sm-mt-0">
+        <section data-aos="fade-in" aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
             <div className="row">
               <div className="col-md-6 text-center">
@@ -53,10 +53,11 @@ const ItemDetails = () => {
                   src={item.nftImage}
                   className="img-fluid img-rounded mb-sm-30"
                   alt={item.title}
+                  data-aos="fade-up"
                 />
               </div>
 
-              <div className="col-md-6">
+              <div data-aos="fade-up" className="col-md-6">
                 <div className="item_info">
                   <h2>
                     {item.title} <span>#{item.tag}</span>
